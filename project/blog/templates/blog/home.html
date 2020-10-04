@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% if messgages %}
+    {% for message in messages %}
+        <div class="alert alert-{{messgae.tags}}">
+            {{message}}
+        </div>
+    {% endfor %}
+{% endif %}
+
+    {% for post in posts  %}
+        
+        <div class="border p-3 mb-4">
+            <img class="img-fluid rounded-circle border" style="width: 120px; height:120px; margin-top:-10px;"
+                    src="{{post.author.profile.image.url}}" alt="{{post.author}}">
+             <h3><a class="text-blue" href="{% url 'blog:post_detail' post.id %}"> {{post.title}}</a></h3>
+             <p> {{post.content|truncatewords:40}} </p>
+        </div>
+        
+    {% endfor %}
+
+    {% include 'blog/pagination.html' %}
+
+{% endblock %}

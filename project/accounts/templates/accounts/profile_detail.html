@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% if messages %}
+
+    {% for message in messages %}
+        <div class="alert alert-{{message.tags}} text-center">
+            {{message}}
+        </div>
+    {% endfor %}
+
+{% endif %}
+
+    
+<div class="border p-4 mb-5">
+    <div class="row">
+        <div class="col-md-3 text-center">
+    
+                <img class="img-fluid rounded-circle border m-2" style="width: 120px; height:120px;"
+                    src="{{profile_detail.image.url}}" alt="{{profile_detail.user.username}}">
+            {% if profile_detail.user == request.user %}
+            <div class="mt-3">
+                <a class="btn btn-success"  href="{% url 'accounts:profile_update' %}"><i
+                        class="fas fa-pen fa-xs"></i> تعديل </a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-9">
+            <h2 class="mb-4">{{profile_detail.user.username}}</h2>
+            <p class="font-weight-bold">الاسم: <span class="font-weight-normal">{{profile_detail.user.first_name}}
+                   {{profile_detail.user.last_name}} </span></p>
+            <p class="font-weight-bold">البريد الإلكتروني: <span class="font-weight-normal">{{profile_detail.user.email}}</span></p>
+        </div>
+    </div>
+</div>
+<!-- <div class="row mb-5">
+    <div class="col-md">
+        <h3 class="border-bottom pb-3 mb-4">عدد التدوينات التي دونتها</h3>
+        <h4 class="bg-secondary text-center p-4 text-light">
+            {{profile_detail.user.author.count}}
+        </h4>
+
+        <h3 class="border-bottom mb-4 pb-3 mt-5">تدويناتي</h3>
+        {% for post in posts %}
+            <ul class="pr-2">
+                <a class="text-blue" style="font-weight: bold;" href="{% url 'blog:post_detail' post.id %}">{{post.title}}</a>
+            </ul>
+        {% empty %}
+            <h4 class="text-center mb-5">لا يوجد تدوينات</h4>
+        {% endfor %}
+
+    </div>
+</div> -->
+        <!-- {% include 'blog/pagination.html' %}     -->
+{% endblock %}

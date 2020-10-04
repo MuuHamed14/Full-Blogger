@@ -1,0 +1,10 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<div class="border p-4 mb-5">
+    <legend class="border-bottom pb-1 mb-3 alert alert-success text-center" >لقد تم تسجيل خروجك بنجاح</legend>
+    <a href="{% url 'accounts:login' %}" style="margin-right: 220px;">هل تريد تسجيل الدخول مرة أخرى؟ </a>
+
+</div>
+{% endblock content %}

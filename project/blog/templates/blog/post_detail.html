@@ -1,0 +1,62 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+        <div class="border p-3 mb-4">
+            <img class="img-fluid rounded-circle border" style="width: 120px; height:120px; margin-top:-10px;"
+                    src="{{post.author.profile.image.url}}" alt="{{user.username}}">
+                    <span class="text-primary" style="margin-right: 10px; "> تم النشر بواسطة : {{post.author}} </span>     
+                    <span class="text-success" style="margin-right: 10px"> نشر في : {{post.post_date|date:'d -m - Y'}}</span>
+                    {% if post.author == request.user %}
+                    <div class="form-group btn-editing" style="margin-top: -116px;">
+                        <a class="btn btn-warning" style="margin-right:560px;" href="{% url 'blog:post_update' post.id %}"> تعديل </a>
+                        <a class="btn btn-danger" href="{% url 'blog:post_delete' post.id %}"> حذف </a>
+                    </div>
+                    <h3 style="margin-top: 30px;"><a class="text-blue"> {{post.title}}</a></h3>
+                    <p> {{post.content}} </p>
+                    {% else %}
+                        <h3 style="margin-top: 10px;"><a class="text-blue"> {{post.title}}</a></h3>
+                        <p> {{post.content}} </p>
+                    {% endif %}
+        </div>
+        <!-- Comments -->
+            <h2 class=" mt-5 mb-3"> التعليقات ({{comments.count}}) </h2>
+            
+            {% if comments %}
+                {% for comment in comments  %}
+                    <div class="mb-3 p-3 comment">
+                        <img class="img-fluid rounded-circle border" style="width: 60px; height:60px; margin-top: -10px;"
+                    src="{{comment.created_by.profile.image.url}}" alt="{{comment.created_by}}">
+                 
+                        <h6 class="border-bottom p-2" style="margin-top: -32px;" > 
+                            <span class="text-danger" style="margin-right: 490px; margin-top:-100px;"> تم النشر في : {{comment.comment_date|date:'Y - m - d'}} </span>   
+                            <p class="mb-0 mt-3 text-primary"> تم النشر بواسطة : {{comment.created_by}} </p> 
+                        </h6>
+                        <p class="mb-0"> {{comment.content}} </p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                    <div class="text-center mb-3 p-4 comment">
+                        <h5 class="mb-0"> .لا يوجد تعليقات </h5>
+                    </div>
+            {% endif %}
+                
+        <!-- End Of Comments -->
+
+        <!-- New Comment Form -->
+        
+            <h3 class="border-bottom pb-3 mb-3 mt-5">إضافة تعلق جديد</h3>
+            <div class="border p-4 mb-5 mt-4">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{comment_form|crispy}}
+                    <input class="btn btn-success" type="submit" style="width: 100%;" value=" اضافة التعليق">
+                </form>
+            </div>
+        <!-- End Of New Comment Form -->
+{% endblock %}

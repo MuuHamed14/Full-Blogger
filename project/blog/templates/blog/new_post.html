@@ -1,0 +1,17 @@
+  
+{% extends 'blog/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="border p-4 mb-5">
+    <legend class="border-bottom pb-1 mb-3"> اضافة تدوينة جديدة </legend>
+    <form method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input class="btn btn-primary mt-4" style="width:100%;" type="submit" value="نشر">
+    </form>
+</div>
+
+{% endblock content %}

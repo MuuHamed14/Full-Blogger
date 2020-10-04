@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="border p-4 mb-5">
+    <h1 class="text-center"> من انا</h1>
+    <h1 class="border-bottom"></h1>
+    <img src="{% static 'blog/images/admin.jpg' %}" alt="Admin Image" class="img-fluid rounded-circle border" style="width: 120px; height:120px; margin-right: 280px; margin-top: 20px;">
+    <p style="font-weight: bold;color: orangered;"> <span style="color: black;"> الاسم : </span> محمد مصطفي شعبان</p>
+    <p style="font-weight: bold;color: red"> <span style="color: black;"> السنة الدراسية : </span> رابعة علوم حاسب </p>
+    <p style="font-weight: bold;color: darkgoldenrod;"> <span style="color: black;"> رقم الهاتف : </span> 01205885988 </p>
+    <p style="font-weight: bold;color:darkgreen;"> <span style="color: black;"> الايميل : </span> muuhamed14mustafa@gmail.com</p>
+</div>
+{% endblock %} 
